@@ -1,219 +1,127 @@
-/* ===== RESET ===== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* ===== BODY ===== */
 body {
-  font-family: 'Segoe UI', Arial, sans-serif;
-  background: linear-gradient(135deg, #0f172a, #1e293b);
-  color: #e2e8f0;
-  min-height: 100vh;
-}
-
-/* ===== CONTAINER ===== */
-.container {
-  max-width: 1000px;
-  margin: 40px auto;
-  padding: 20px;
-}
-
-/* ===== TITLES ===== */
-h1 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #38bdf8;
-}
-
-p {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #cbd5f5;
-}
-
-/* ===== MENU ===== */
-.menu {
-  list-style: none;
-  margin-top: 20px;
-  text-align: center;
-}
-
-.menu li {
-  margin: 12px 0;
-}
-
-.menu a {
-  display: inline-block;
-  padding: 12px 20px;
-  background: #1e293b;
-  border-radius: 10px;
-  color: #38bdf8;
-  text-decoration: none;
-  font-size: 18px;
-  transition: 0.3s;
-}
-
-.menu a:hover {
-  background: #38bdf8;
-  color: #0f172a;
-}
-
-/* ===== CARD ===== */
-.card {
-  background: #1e293b;
-  padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-  margin: 20px 0;
-  text-align: center;
-}
-
-/* ===== VALUE ===== */
-.value {
-  font-size: 42px;
-  font-weight: bold;
-  color: #22c55e;
-}
-
-/* ===== INPUT ===== */
-input {
-  width: 100%;
-  padding: 12px;
-  margin: 10px 0;
-  border-radius: 10px;
-  border: none;
-  outline: none;
-  background: #0f172a;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #121212;
   color: white;
 }
 
-/* ===== BUTTON ===== */
-button {
+/* 🔐 LOGIN */
+.login-container {
+  width: 300px;
+  margin: 150px auto;
+  padding: 25px;
+  background: #1e1e2f;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.login-container input {
   width: 100%;
-  padding: 12px;
-  margin-top: 10px;
+  padding: 10px;
+  margin: 10px 0;
   border: none;
-  border-radius: 10px;
-  background: #38bdf8;
-  color: #0f172a;
-  font-weight: bold;
+  border-radius: 5px;
+}
+
+.login-container button {
+  width: 100%;
+  padding: 10px;
+  background: #2196f3;
+  border: none;
+  color: white;
+  border-radius: 5px;
   cursor: pointer;
-  transition: 0.3s;
 }
 
-button:hover {
-  background: #0ea5e9;
+.login-container button:hover {
+  background: #1976d2;
 }
 
-/* ===== LOGIN BOX ===== */
-.login-box {
-  width: 320px;
-  margin: 120px auto;
-  background: #1e293b;
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-  text-align: center;
+/* 📊 ADMIN PANEL */
+.admin-container {
+  padding: 20px;
 }
 
-.login-box h2 {
-  margin-bottom: 20px;
-}
-
-/* ===== ERROR ===== */
-.error {
-  color: #ef4444;
-  margin-top: 10px;
-}
-
-/* ===== CHART ===== */
-canvas {
-  width: 100%;
-  max-height: 300px;
-  background: #0f172a;
-  border-radius: 10px;
-  padding: 10px;
-}
-
-/* ===== TABLE (для результатів) ===== */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-}
-
-table th, table td {
-  padding: 10px;
-  border-bottom: 1px solid #334155;
-  text-align: center;
-}
-
-table th {
-  color: #38bdf8;
-}
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 600px) {
-  .container {
-    padding: 10px;
-  }
-
-  h1 {
-    font-size: 22px;
-  }
-
-  .login-box {
-    width: 90%;
-  }
-}
-/* ===== LOGIN PAGE CENTER ===== */
-body {
+.admin-header {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 
-/* ===== LOGIN BOX ===== */
-.login-box {
-  width: 350px;
-  background: #1e293b;
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.6);
-  text-align: center;
+.admin-header h1 {
+  margin: 0;
 }
 
-/* ===== INPUT ===== */
-.login-box input {
-  width: 100%;
-  padding: 12px;
-  margin: 10px 0;
-  border-radius: 10px;
+.admin-header button {
+  padding: 10px 15px;
+  background: #4caf50;
   border: none;
-  background: #0f172a;
   color: white;
-}
-
-/* ===== BUTTON ===== */
-.login-box button {
-  width: 100%;
-  padding: 12px;
-  border: none;
-  border-radius: 10px;
-  background: #38bdf8;
-  color: black;
-  font-weight: bold;
+  border-radius: 5px;
   cursor: pointer;
 }
 
-.login-box button:hover {
-  background: #0ea5e9;
+.admin-header button:hover {
+  background: #45a049;
 }
 
-/* ===== ERROR ===== */
-.error {
-  color: #ef4444;
-  margin-top: 10px;
+/* 📦 КАРТКИ */
+.card {
+  background: #1e1e2f;
+  padding: 15px;
+  margin-top: 15px;
+  border-radius: 10px;
+}
+
+.card h3 {
+  margin: 0 0 10px;
+}
+
+/* 🟢 CREATE PAGE */
+.create-container {
+  width: 400px;
+  margin: 100px auto;
+  padding: 30px;
+  background: #1e1e2f;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.create-container h1 {
+  margin-bottom: 20px;
+}
+
+.create-container input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+}
+
+/* 🔥 КНОПКА СТВОРЕННЯ */
+#createBtn {
+  width: 100%;
+  padding: 12px;
+  background: #4caf50;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 16px;
+
+  cursor: pointer;
+  pointer-events: auto;
+  transition: 0.3s;
+}
+
+#createBtn:hover {
+  background: #45a049;
+}
+
+/* 📢 СТАТУС */
+#status {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #ccc;
 }
