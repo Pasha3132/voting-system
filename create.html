@@ -9,12 +9,12 @@
 <body>
 
 <div class="container">
-  <h1>Створити нове голосування</h1>
-
-  <button onclick="createVote()">Обнулити результати</button>
+  <h1>Створити голосування</h1>
+  <button id="btn">Обнулити результати</button>
 </div>
 
 <script type="module">
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
 import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js";
 
@@ -26,17 +26,16 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("btn").onclick = function() {
-    set(ref(db, "votes"), {
-      candidate1: 0,
-      candidate2: 0,
-      total: 0
-    });
+document.getElementById("btn").onclick = () => {
+  set(ref(db, "votes"), {
+    candidate1: 0,
+    candidate2: 0,
+    total: 0
+  });
 
-    alert("Голосування створено");
-  };
-});
+  alert("Голосування створено");
+};
+
 </script>
 
 </body>
