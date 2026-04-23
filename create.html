@@ -12,60 +12,54 @@
 
   <input type="text" id="title" placeholder="Назва голосування">
 
-  <input type="text" id="candidate1" placeholder="Кандидат 1">
-  <input type="text" id="candidate2" placeholder="Кандидат 2">
+  <input type="text" id="option1" placeholder="Варіант 1">
+  <input type="text" id="option2" placeholder="Варіант 2">
 
-  <button id="createBtn">Створити голосування</button>
+  <button id="createBtn">Створити</button>
 
   <p id="status"></p>
 </div>
 
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyC1lGYxdhZxhxdHtDFI26DI6sAfsZ3BI3s",
-    authDomain: "project-3640254844635182653.firebaseapp.com",
-    databaseURL: "https://project-3640254844635182653-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "project-3640254844635182653",
-    storageBucket: "project-3640254844635182653.firebasestorage.app",
-    messagingSenderId: "520268018148",
-    appId: "1:520268018148:web:4d6ca65e683e1193e997f1"
-  };
+const firebaseConfig = {
+  apiKey: "AIzaSyC1lGYxdhZxhxdHtDFI26DI6sAfsZ3BI3s",
+  databaseURL: "https://project-3640254844635182653-default-rtdb.europe-west1.firebasedatabase.app"
+};
 
-  const app = initializeApp(firebaseConfig);
-  const db = getDatabase(app);
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
 
-  const btn = document.getElementById("createBtn");
+document.getElementById("createBtn").onclick = () => {
+  const title = document.getElementById("title").value;
+  const option1 = document.getElementById("option1").value;
+  const option2 = document.getElementById("option2").value;
 
-  btn.addEventListener("click", () => {
-    const title = document.getElementById("title").value;
-    const c1 = document.getElementById("candidate1").value;
-    const c2 = document.getElementById("candidate2").value;
+  if (!title || !option1 || !option2) {
+    document.getElementById("status").innerText = "Заповни всі поля!";
+    return;
+  }
 
-    if (!title || !c1 || !c2) {
-      document.getElementById("status").innerText = "Заповни всі поля!";
-      return;
-    }
+  const id = Date.now();
 
-    const id = Date.now();
-
-    set(ref(db, "polls/" + id), {
-      title: title,
-      candidates: {
-        candidate1: c1,
-        candidate2: c2
-      },
-      votes: {
-        candidate1: 0,
-        candidate2: 0,
-        total: 0
-      }
-    });
-
-    document.getElementById("status").innerText = "Голосування створено!";
+  set(ref(db, "polls/" + id), {
+    title: title,
+    options: {
+      option1: option1,
+      option2: option2
+    },
+    votes: {
+      option1: 0,
+      option2: 0,
+      total: 0
+    },
+    createdAt: id
   });
+
+  document.getElementById("status").innerText = "Голосування створено!";
+};
 </script>
 
 </body>
