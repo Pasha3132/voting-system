@@ -11,12 +11,12 @@
 <div class="admin-container">
   <h1>Активні голосування</h1>
 
-  <div id="pollsList"></div>
+  <div id="polls"></div>
 </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { getDatabase, ref, onValue, remove } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC1lGYxdhZxhxdHtDFI26DI6sAfsZ3BI3s",
@@ -26,15 +26,15 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-const pollsList = document.getElementById("pollsList");
+const container = document.getElementById("polls");
 
 onValue(ref(db, "polls"), (snapshot) => {
-  pollsList.innerHTML = "";
+  container.innerHTML = "";
 
   const data = snapshot.val();
 
   if (!data) {
-    pollsList.innerHTML = "<p>Немає голосувань</p>";
+    container.innerHTML = "<p>Немає голосувань</p>";
     return;
   }
 
@@ -49,13 +49,20 @@ onValue(ref(db, "polls"), (snapshot) => {
 
       <p>${poll.options.option1}: ${poll.votes.option1}</p>
       <p>${poll.options.option2}: ${poll.votes.option2}</p>
+      <p><b>Всього: ${poll.votes.total}</b></p>
 
-      <strong>Всього: ${poll.votes.total}</strong>
+      <button onclick="deletePoll('${id}')">❌ Видалити</button>
     `;
 
-    pollsList.appendChild(div);
+    container.appendChild(div);
   });
 });
+
+window.deletePoll = function(id) {
+  if (confirm("Видалити голосування?")) {
+    remove(ref(db, "polls/" + id));
+  }
+};
 </script>
 
 </body>
