@@ -1,0 +1,22 @@
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyC1lGYxdhZxhxdHtDFI26DI6sAfsZ3BI3s",
+  databaseURL: "https://project-3640254844635182653-default-rtdb.europe-west1.firebasedatabase.app"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+window.createVote = function() {
+  set(ref(db, "votes"), {
+    candidate1: 0,
+    candidate2: 0,
+    total: 0
+  });
+
+  alert("Голосування створено!");
+}
+</script>
