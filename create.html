@@ -9,8 +9,12 @@
 <body>
 
 <div class="container">
-  <h1>Створити голосування</h1>
-  <button id="btn">Обнулити результати</button>
+  <h1>Створення голосування</h1>
+
+  <input type="text" id="title" placeholder="Назва голосування">
+  <br><br>
+
+  <button id="btn">Створити</button>
 </div>
 
 <script type="module">
@@ -27,13 +31,24 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
 document.getElementById("btn").onclick = () => {
-  set(ref(db, "votes"), {
+
+  let title = document.getElementById("title").value;
+
+  if (!title) {
+    alert("Введи назву голосування");
+    return;
+  }
+
+  set(ref(db, "votes/current"), {
+    title: title,
     candidate1: 0,
     candidate2: 0,
-    total: 0
+    total: 0,
+    createdAt: Date.now()
   });
 
   alert("Голосування створено");
+
 };
 
 </script>
