@@ -1,12 +1,46 @@
+/* =========================
+   BASE
+========================= */
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background: #121212;
-  color: white;
+  color: #ffffff;
 }
 
 /* =========================
-   LOGIN
+   INPUTS
+========================= */
+input {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 6px;
+  outline: none;
+  font-size: 14px;
+}
+
+/* =========================
+   BUTTONS (ГЛОБАЛЬНО)
+========================= */
+button {
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+
+  /* ВАЖЛИВО — щоб кнопки не ламались */
+  pointer-events: auto;
+}
+
+/* =========================
+   LOGIN PAGE
 ========================= */
 .login-container {
   width: 320px;
@@ -17,22 +51,10 @@ body {
   text-align: center;
 }
 
-.login-container input {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: none;
-  border-radius: 5px;
-}
-
 .login-container button {
   width: 100%;
-  padding: 10px;
   background: #2196f3;
-  border: none;
   color: white;
-  border-radius: 5px;
-  cursor: pointer;
 }
 
 .login-container button:hover {
@@ -40,37 +62,44 @@ body {
 }
 
 /* =========================
-   ADMIN PANEL
+   CREATE PAGE
 ========================= */
-.admin-container {
-  padding: 20px;
+.create-container {
+  width: 420px;
+  margin: 80px auto;
+  padding: 30px;
+  background: #1e1e2f;
+  border-radius: 10px;
+  text-align: center;
 }
 
-.admin-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.admin-header h1 {
-  margin: 0;
-}
-
-.admin-header button {
-  padding: 10px 15px;
+#createBtn {
+  width: 100%;
+  margin-top: 10px;
   background: #4caf50;
-  border: none;
   color: white;
-  border-radius: 5px;
-  cursor: pointer;
+  font-weight: bold;
 }
 
-.admin-header button:hover {
-  background: #45a049;
+#createBtn:hover {
+  background: #43a047;
 }
 
 /* =========================
-   CARDS (polls list)
+   ADMIN PANEL
+========================= */
+.admin-container {
+  width: 90%;
+  max-width: 800px;
+  margin: 30px auto;
+}
+
+.admin-container h1 {
+  text-align: center;
+}
+
+/* =========================
+   POLL CARDS
 ========================= */
 .card {
   background: #1e1e2f;
@@ -83,14 +112,15 @@ body {
   margin-top: 0;
 }
 
+.card p {
+  margin: 5px 0;
+}
+
+/* Кнопка видалення */
 .card button {
   margin-top: 10px;
-  padding: 8px 12px;
   background: #e53935;
-  border: none;
   color: white;
-  border-radius: 5px;
-  cursor: pointer;
 }
 
 .card button:hover {
@@ -98,67 +128,11 @@ body {
 }
 
 /* =========================
-   CREATE PAGE
-========================= */
-.create-container {
-  width: 420px;
-  margin: 80px auto;
-  padding: 30px;
-  background: #1e1e2f;
-  border-radius: 12px;
-  text-align: center;
-  box-shadow: 0 0 20px rgba(0,0,0,0.5);
-}
-
-.create-container h1 {
-  margin-bottom: 20px;
-}
-
-.create-container input {
-  width: 100%;
-  padding: 12px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 6px;
-  outline: none;
-  font-size: 14px;
-}
-
-/* =========================
-   BUTTONS (IMPORTANT FIX)
-========================= */
-button {
-  pointer-events: auto;
-  cursor: pointer;
-}
-
-/* Create button */
-#createBtn {
-  width: 100%;
-  padding: 12px;
-  margin-top: 10px;
-
-  background: linear-gradient(135deg, #4caf50, #2e7d32);
-  border: none;
-  border-radius: 6px;
-
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-
-  transition: 0.25s;
-}
-
-#createBtn:hover {
-  transform: scale(1.03);
-  background: linear-gradient(135deg, #66bb6a, #388e3c);
-}
-
-/* =========================
    STATUS TEXT
 ========================= */
 #status {
-  margin-top: 15px;
+  margin-top: 10px;
   font-size: 14px;
-  color: #ccc;
+  color: #cccccc;
+  min-height: 20px;
 }
