@@ -1,15 +1,46 @@
 /* =========================
-   BASE
+   RESET
 ========================= */
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
+/* =========================
+   BODY
+========================= */
 body {
-  margin: 0;
   font-family: Arial, sans-serif;
   background: #121212;
   color: #ffffff;
+}
+
+/* =========================
+   CONTAINERS
+========================= */
+.login-container,
+.create-container,
+.admin-container {
+  width: 90%;
+  max-width: 420px;
+  margin: 80px auto;
+  padding: 25px;
+  background: #1e1e2f;
+  border-radius: 10px;
+}
+
+/* admin ширший */
+.admin-container {
+  max-width: 800px;
+}
+
+/* =========================
+   HEADINGS
+========================= */
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 /* =========================
@@ -18,41 +49,33 @@ body {
 input {
   width: 100%;
   padding: 12px;
-  margin: 8px 0;
+  margin: 10px 0;
   border: none;
   border-radius: 6px;
-  outline: none;
   font-size: 14px;
 }
 
 /* =========================
-   BUTTONS (ГЛОБАЛЬНО)
+   BUTTONS
 ========================= */
 button {
+  display: block;
+  width: 100%;
   padding: 12px;
+  margin-top: 10px;
+
   border: none;
   border-radius: 6px;
-  font-size: 14px;
-  cursor: pointer;
 
-  /* ВАЖЛИВО — щоб кнопки не ламались */
+  font-size: 14px;
+  font-weight: bold;
+
+  cursor: pointer;
   pointer-events: auto;
 }
 
-/* =========================
-   LOGIN PAGE
-========================= */
-.login-container {
-  width: 320px;
-  margin: 150px auto;
-  padding: 25px;
-  background: #1e1e2f;
-  border-radius: 10px;
-  text-align: center;
-}
-
+/* login */
 .login-container button {
-  width: 100%;
   background: #2196f3;
   color: white;
 }
@@ -61,24 +84,10 @@ button {
   background: #1976d2;
 }
 
-/* =========================
-   CREATE PAGE
-========================= */
-.create-container {
-  width: 420px;
-  margin: 80px auto;
-  padding: 30px;
-  background: #1e1e2f;
-  border-radius: 10px;
-  text-align: center;
-}
-
+/* create */
 #createBtn {
-  width: 100%;
-  margin-top: 10px;
   background: #4caf50;
   color: white;
-  font-weight: bold;
 }
 
 #createBtn:hover {
@@ -86,45 +95,59 @@ button {
 }
 
 /* =========================
-   ADMIN PANEL
-========================= */
-.admin-container {
-  width: 90%;
-  max-width: 800px;
-  margin: 30px auto;
-}
-
-.admin-container h1 {
-  text-align: center;
-}
-
-/* =========================
    POLL CARDS
 ========================= */
 .card {
-  background: #1e1e2f;
+  background: #2a2a3d;
   padding: 15px;
   margin-top: 15px;
-  border-radius: 10px;
+  border-radius: 8px;
 }
 
 .card h3 {
-  margin-top: 0;
+  margin-bottom: 10px;
 }
 
-.card p {
-  margin: 5px 0;
-}
-
-/* Кнопка видалення */
+/* кнопки в карточці */
 .card button {
-  margin-top: 10px;
+  width: auto;
+  display: inline-block;
+  margin-right: 8px;
+  padding: 8px 12px;
+}
+
+/* кнопка результатів */
+.card button:first-of-type {
+  background: #ff9800;
+  color: white;
+}
+
+.card button:first-of-type:hover {
+  background: #fb8c00;
+}
+
+/* кнопка видалення */
+.card button:last-of-type {
   background: #e53935;
   color: white;
 }
 
-.card button:hover {
+.card button:last-of-type:hover {
   background: #c62828;
+}
+
+/* =========================
+   RESULTS BLOCK
+========================= */
+.results {
+  margin-top: 10px;
+  padding: 10px;
+  background: #1e1e2f;
+  border-radius: 6px;
+}
+
+.results p {
+  margin: 5px 0;
 }
 
 /* =========================
@@ -133,6 +156,6 @@ button {
 #status {
   margin-top: 10px;
   font-size: 14px;
-  color: #cccccc;
-  min-height: 20px;
+  color: #ccc;
+  text-align: center;
 }
