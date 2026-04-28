@@ -1,4 +1,3 @@
-/* база */
 body {
   margin: 0;
   font-family: Arial;
@@ -6,7 +5,6 @@ body {
   color: white;
 }
 
-/* контейнери */
 .login-container,
 .create-container,
 .admin-container {
@@ -22,16 +20,14 @@ body {
   max-width: 800px;
 }
 
-/* input */
 input {
   width: 100%;
   padding: 10px;
   margin: 10px 0;
-  border-radius: 5px;
   border: none;
+  border-radius: 5px;
 }
 
-/* кнопки загальні */
 button {
   padding: 10px;
   border: none;
@@ -39,14 +35,12 @@ button {
   cursor: pointer;
 }
 
-/* create */
 #createBtn {
   width: 100%;
   background: #4caf50;
   color: white;
 }
 
-/* карточки */
 .card {
   background: #2a2a3d;
   padding: 15px;
@@ -54,12 +48,10 @@ button {
   border-radius: 8px;
 }
 
-/* кнопки в карточці */
 .card button {
   margin-right: 10px;
 }
 
-/* результати */
 .results {
   margin-top: 10px;
   padding: 10px;
