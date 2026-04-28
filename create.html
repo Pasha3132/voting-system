@@ -58,6 +58,8 @@ document.getElementById("createBtn").onclick = () => {
     createdAt: id
   });
 
+  set(ref(db, "activePoll"), String(id));
+
   document.getElementById("status").innerText = "Голосування створено!";
 };
 </script>
