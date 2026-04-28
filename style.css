@@ -1,102 +1,71 @@
-/* =========================
-   RESET
-========================= */
+/* RESET */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* =========================
-   BODY
-========================= */
+/* BODY */
 body {
-  font-family: Arial, sans-serif;
   background: #121212;
-  color: #ffffff;
+  color: white;
+  font-family: Arial, sans-serif;
 }
 
-/* =========================
-   CONTAINERS
-========================= */
+/* CONTAINERS */
 .login-container,
 .create-container,
 .admin-container {
   width: 90%;
-  max-width: 420px;
+  max-width: 450px;
   margin: 80px auto;
   padding: 25px;
   background: #1e1e2f;
   border-radius: 10px;
 }
 
-/* admin ширший */
 .admin-container {
   max-width: 800px;
 }
 
-/* =========================
-   HEADINGS
-========================= */
+/* TITLE */
 h1 {
   text-align: center;
   margin-bottom: 20px;
 }
 
-/* =========================
-   INPUTS
-========================= */
+/* INPUT */
 input {
   width: 100%;
   padding: 12px;
-  margin: 10px 0;
+  margin-top: 10px;
   border: none;
   border-radius: 6px;
-  font-size: 14px;
 }
 
-/* =========================
-   BUTTONS
-========================= */
+/* BUTTON */
 button {
-  display: block;
   width: 100%;
   padding: 12px;
   margin-top: 10px;
-
   border: none;
   border-radius: 6px;
-
-  font-size: 14px;
-  font-weight: bold;
-
   cursor: pointer;
-  pointer-events: auto;
 }
 
-/* login */
+/* LOGIN BUTTON */
 .login-container button {
   background: #2196f3;
   color: white;
 }
 
-.login-container button:hover {
-  background: #1976d2;
-}
-
-/* create */
+/* CREATE BUTTON */
 #createBtn {
   background: #4caf50;
   color: white;
 }
 
-#createBtn:hover {
-  background: #43a047;
-}
-
-/* =========================
-   POLL CARDS
-========================= */
+/* CARDS */
 .card {
   background: #2a2a3d;
   padding: 15px;
@@ -108,54 +77,30 @@ button {
   margin-bottom: 10px;
 }
 
-/* кнопки в карточці */
+/* BUTTONS IN CARD */
 .card button {
   width: auto;
   display: inline-block;
-  margin-right: 8px;
+  margin-right: 10px;
   padding: 8px 12px;
 }
 
-/* кнопка результатів */
-.card button:first-of-type {
-  background: #ff9800;
+/* RESULTS BUTTON */
+.card button:first-child {
+  background: orange;
   color: white;
 }
 
-.card button:first-of-type:hover {
-  background: #fb8c00;
-}
-
-/* кнопка видалення */
-.card button:last-of-type {
-  background: #e53935;
+/* DELETE BUTTON */
+.card button:last-child {
+  background: red;
   color: white;
 }
 
-.card button:last-of-type:hover {
-  background: #c62828;
-}
-
-/* =========================
-   RESULTS BLOCK
-========================= */
+/* RESULTS BLOCK */
 .results {
   margin-top: 10px;
   padding: 10px;
   background: #1e1e2f;
   border-radius: 6px;
-}
-
-.results p {
-  margin: 5px 0;
-}
-
-/* =========================
-   STATUS TEXT
-========================= */
-#status {
-  margin-top: 10px;
-  font-size: 14px;
-  color: #ccc;
-  text-align: center;
 }
