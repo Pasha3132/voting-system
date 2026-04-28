@@ -16,7 +16,7 @@
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getDatabase, ref, onValue, remove } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { getDatabase, ref, onValue, remove, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC1lGYxdhZxhxdHtDFI26DI6sAfsZ3BI3s",
@@ -28,6 +28,7 @@ const db = getDatabase(app);
 
 const container = document.getElementById("polls");
 
+// 📋 список голосувань
 onValue(ref(db, "polls"), (snapshot) => {
   container.innerHTML = "";
 
@@ -47,17 +48,38 @@ onValue(ref(db, "polls"), (snapshot) => {
     div.innerHTML = `
       <h3>${poll.title}</h3>
 
-      <p>${poll.options.option1}: ${poll.votes.option1}</p>
-      <p>${poll.options.option2}: ${poll.votes.option2}</p>
-      <p><b>Всього: ${poll.votes.total}</b></p>
-
+      <button onclick="showResults('${id}')">📊 Результати</button>
       <button onclick="deletePoll('${id}')">❌ Видалити</button>
+
+      <div id="results-${id}" class="results" style="display:none;"></div>
     `;
 
     container.appendChild(div);
   });
 });
 
+// 📊 показ результатів
+window.showResults = async function(id) {
+  const el = document.getElementById("results-" + id);
+
+  if (el.style.display === "block") {
+    el.style.display = "none";
+    return;
+  }
+
+  const snapshot = await get(ref(db, "polls/" + id));
+  const poll = snapshot.val();
+
+  el.innerHTML = `
+    <p>${poll.options.option1}: ${poll.votes.option1}</p>
+    <p>${poll.options.option2}: ${poll.votes.option2}</p>
+    <p><b>Всього: ${poll.votes.total}</b></p>
+  `;
+
+  el.style.display = "block";
+};
+
+// ❌ видалення
 window.deletePoll = function(id) {
   if (confirm("Видалити голосування?")) {
     remove(ref(db, "polls/" + id));
