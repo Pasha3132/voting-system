@@ -14,6 +14,8 @@
   <div id="polls"></div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getDatabase, ref, onValue, remove, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
@@ -28,10 +30,8 @@ const db = getDatabase(app);
 
 const container = document.getElementById("polls");
 
-// 📋 список голосувань
 onValue(ref(db, "polls"), (snapshot) => {
   container.innerHTML = "";
-
   const data = snapshot.val();
 
   if (!data) {
@@ -51,35 +51,45 @@ onValue(ref(db, "polls"), (snapshot) => {
       <button onclick="showResults('${id}')">📊 Результати</button>
       <button onclick="deletePoll('${id}')">❌ Видалити</button>
 
-      <div id="results-${id}" class="results" style="display:none;"></div>
+      <div id="results-${id}" class="results" style="display:none;">
+        <canvas id="chart-${id}"></canvas>
+      </div>
     `;
 
     container.appendChild(div);
   });
 });
 
-// 📊 показ результатів
 window.showResults = async function(id) {
-  const el = document.getElementById("results-" + id);
+  const block = document.getElementById("results-" + id);
 
-  if (el.style.display === "block") {
-    el.style.display = "none";
+  if (block.style.display === "block") {
+    block.style.display = "none";
     return;
   }
 
   const snapshot = await get(ref(db, "polls/" + id));
   const poll = snapshot.val();
 
-  el.innerHTML = `
-    <p>${poll.options.option1}: ${poll.votes.option1}</p>
-    <p>${poll.options.option2}: ${poll.votes.option2}</p>
-    <p><b>Всього: ${poll.votes.total}</b></p>
-  `;
+  const v1 = poll.votes.option1 || 0;
+  const v2 = poll.votes.option2 || 0;
 
-  el.style.display = "block";
+  const ctx = document.getElementById("chart-" + id).getContext("2d");
+
+  new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: [poll.options.option1, poll.options.option2],
+      datasets: [{
+        label: "Голоси",
+        data: [v1, v2]
+      }]
+    }
+  });
+
+  block.style.display = "block";
 };
 
-// ❌ видалення
 window.deletePoll = function(id) {
   if (confirm("Видалити голосування?")) {
     remove(ref(db, "polls/" + id));
