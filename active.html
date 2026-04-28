@@ -11,14 +11,14 @@
 <div class="admin-container">
   <h1>Активні голосування</h1>
 
+  <button onclick="endPoll()">⛔ Завершити голосування</button>
+
   <div id="polls"></div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getDatabase, ref, onValue, remove, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { getDatabase, ref, onValue, remove, set } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC1lGYxdhZxhxdHtDFI26DI6sAfsZ3BI3s",
@@ -30,8 +30,12 @@ const db = getDatabase(app);
 
 const container = document.getElementById("polls");
 
+// ===================
+// Вивід голосувань
+// ===================
 onValue(ref(db, "polls"), (snapshot) => {
   container.innerHTML = "";
+
   const data = snapshot.val();
 
   if (!data) {
@@ -44,50 +48,52 @@ onValue(ref(db, "polls"), (snapshot) => {
 
     const div = document.createElement("div");
     div.className = "card";
+    div.id = "poll-" + id;
 
     div.innerHTML = `
       <h3>${poll.title}</h3>
 
-      <button onclick="showResults('${id}')">📊 Результати</button>
+      <button onclick="setActive('${id}')">🟢 Активне</button>
       <button onclick="deletePoll('${id}')">❌ Видалити</button>
 
-      <div id="results-${id}" class="results" style="display:none;">
-        <canvas id="chart-${id}"></canvas>
-      </div>
+      <p>${poll.options.option1}: ${poll.votes.option1}</p>
+      <p>${poll.options.option2}: ${poll.votes.option2}</p>
+      <p><b>Всього: ${poll.votes.total}</b></p>
     `;
 
     container.appendChild(div);
   });
 });
 
-window.showResults = async function(id) {
-  const block = document.getElementById("results-" + id);
+// ===================
+// Активне голосування
+// ===================
+onValue(ref(db, "activePoll"), (snapshot) => {
+  const activeID = snapshot.val();
 
-  if (block.style.display === "block") {
-    block.style.display = "none";
-    return;
-  }
-
-  const snapshot = await get(ref(db, "polls/" + id));
-  const poll = snapshot.val();
-
-  const v1 = poll.votes.option1 || 0;
-  const v2 = poll.votes.option2 || 0;
-
-  const ctx = document.getElementById("chart-" + id).getContext("2d");
-
-  new Chart(ctx, {
-    type: "bar",
-    data: {
-      labels: [poll.options.option1, poll.options.option2],
-      datasets: [{
-        label: "Голоси",
-        data: [v1, v2]
-      }]
-    }
+  document.querySelectorAll(".card").forEach(card => {
+    card.style.border = "none";
   });
 
-  block.style.display = "block";
+  if (activeID) {
+    const activeCard = document.getElementById("poll-" + activeID);
+    if (activeCard) {
+      activeCard.style.border = "2px solid #4caf50";
+    }
+  }
+});
+
+// ===================
+// ФУНКЦІЇ
+// ===================
+window.setActive = function(id) {
+  set(ref(db, "activePoll"), id);
+};
+
+window.endPoll = function() {
+  if (confirm("Завершити голосування?")) {
+    set(ref(db, "activePoll"), null);
+  }
 };
 
 window.deletePoll = function(id) {
