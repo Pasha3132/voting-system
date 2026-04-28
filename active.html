@@ -31,11 +31,10 @@ const db = getDatabase(app);
 const container = document.getElementById("polls");
 
 // ===================
-// Вивід голосувань
+// ВИВІД ГОЛОСУВАНЬ
 // ===================
 onValue(ref(db, "polls"), (snapshot) => {
   container.innerHTML = "";
-
   const data = snapshot.val();
 
   if (!data) {
@@ -54,11 +53,14 @@ onValue(ref(db, "polls"), (snapshot) => {
       <h3>${poll.title}</h3>
 
       <button onclick="setActive('${id}')">🟢 Активне</button>
+      <button onclick="toggleResults('${id}')">📊 Результати</button>
       <button onclick="deletePoll('${id}')">❌ Видалити</button>
 
-      <p>${poll.options.option1}: ${poll.votes.option1}</p>
-      <p>${poll.options.option2}: ${poll.votes.option2}</p>
-      <p><b>Всього: ${poll.votes.total}</b></p>
+      <div id="results-${id}" class="results" style="display:none;">
+        <p>${poll.options.option1}: ${poll.votes.option1}</p>
+        <p>${poll.options.option2}: ${poll.votes.option2}</p>
+        <p><b>Всього: ${poll.votes.total}</b></p>
+      </div>
     `;
 
     container.appendChild(div);
@@ -66,7 +68,7 @@ onValue(ref(db, "polls"), (snapshot) => {
 });
 
 // ===================
-// Активне голосування
+// ПІДСВІТКА АКТИВНОГО
 // ===================
 onValue(ref(db, "activePoll"), (snapshot) => {
   const activeID = snapshot.val();
@@ -100,6 +102,11 @@ window.deletePoll = function(id) {
   if (confirm("Видалити голосування?")) {
     remove(ref(db, "polls/" + id));
   }
+};
+
+window.toggleResults = function(id) {
+  const el = document.getElementById("results-" + id);
+  el.style.display = el.style.display === "none" ? "block" : "none";
 };
 </script>
 
