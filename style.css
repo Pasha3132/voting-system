@@ -1,10 +1,18 @@
-body {
+/* RESET */
+* {
   margin: 0;
-  font-family: Arial;
-  background: #121212;
-  color: white;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+/* BODY */
+body {
+  font-family: Arial, sans-serif;
+  background: #121212;
+  color: #ffffff;
+}
+
+/* CONTAINER */
 .admin-container {
   width: 90%;
   max-width: 800px;
@@ -14,36 +22,61 @@ body {
   border-radius: 10px;
 }
 
+/* TITLE */
 h1 {
   text-align: center;
+  margin-bottom: 20px;
 }
 
+/* BUTTONS */
 button {
   padding: 10px;
   margin: 5px;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
+  font-weight: bold;
+}
+
+/* кнопка активного */
+button:nth-child(1) {
+  background: #4caf50;
+  color: white;
+}
+
+/* кнопка результатів */
+button:nth-child(2) {
+  background: #ff9800;
+  color: white;
+}
+
+/* кнопка видалення */
+button:nth-child(3) {
+  background: #e53935;
+  color: white;
 }
 
 button:hover {
   opacity: 0.9;
 }
 
-button:nth-child(1) {
-  background: #4caf50;
-  color: white;
-}
-
-button:nth-child(2) {
-  background: red;
-  color: white;
-}
-
+/* CARD */
 .card {
   background: #2a2a3d;
   padding: 15px;
   margin-top: 15px;
   border-radius: 8px;
   transition: 0.2s;
+}
+
+/* RESULTS */
+.results {
+  margin-top: 10px;
+  padding: 10px;
+  background: #1e1e2f;
+  border-radius: 6px;
+}
+
+.results p {
+  margin: 5px 0;
 }
