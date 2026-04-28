@@ -5,6 +5,7 @@
   <title>Створити голосування</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <div class="create-container">
@@ -24,6 +25,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
+// 🔥 Твій Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyC1lGYxdhZxhxdHtDFI26DI6sAfsZ3BI3s",
   databaseURL: "https://project-3640254844635182653-default-rtdb.europe-west1.firebasedatabase.app"
@@ -32,35 +34,54 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-document.getElementById("createBtn").onclick = () => {
-  const title = document.getElementById("title").value;
-  const option1 = document.getElementById("option1").value;
-  const option2 = document.getElementById("option2").value;
+// =====================
+// КНОПКА СТВОРЕННЯ
+// =====================
+document.getElementById("createBtn").onclick = async () => {
+
+  const title = document.getElementById("title").value.trim();
+  const option1 = document.getElementById("option1").value.trim();
+  const option2 = document.getElementById("option2").value.trim();
+
+  const status = document.getElementById("status");
 
   if (!title || !option1 || !option2) {
-    document.getElementById("status").innerText = "Заповни всі поля!";
+    status.innerText = "⚠ Заповни всі поля!";
     return;
   }
 
   const id = Date.now();
 
-  set(ref(db, "polls/" + id), {
-    title: title,
-    options: {
-      option1: option1,
-      option2: option2
-    },
-    votes: {
-      option1: 0,
-      option2: 0,
-      total: 0
-    },
-    createdAt: id
-  });
+  try {
+    // 1. створюємо голосування
+    await set(ref(db, "polls/" + id), {
+      title: title,
+      options: {
+        option1: option1,
+        option2: option2
+      },
+      votes: {
+        option1: 0,
+        option2: 0,
+        total: 0
+      },
+      createdAt: id
+    });
 
-  set(ref(db, "activePoll"), String(id));
+    // 2. робимо його активним
+    await set(ref(db, "activePoll"), String(id));
 
-  document.getElementById("status").innerText = "Голосування створено!";
+    status.innerText = "✅ Голосування створено і активовано!";
+
+    // очистка полів
+    document.getElementById("title").value = "";
+    document.getElementById("option1").value = "";
+    document.getElementById("option2").value = "";
+
+  } catch (error) {
+    console.error(error);
+    status.innerText = "❌ Помилка при створенні";
+  }
 };
 </script>
 
