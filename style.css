@@ -1,82 +1,192 @@
-/* RESET */
+/* =========================
+   RESET
+========================= */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* BODY */
+/* =========================
+   BODY
+========================= */
 body {
   font-family: Arial, sans-serif;
   background: #121212;
+  color: white;
+  min-height: 100vh;
+}
+
+/* =========================
+   CONTAINER
+========================= */
+.admin-container,
+.container {
+  width: 90%;
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 25px;
+  background: #1e1e2f;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.4);
+}
+
+/* =========================
+   TITLES
+========================= */
+h1 {
+  text-align: center;
+  margin-bottom: 25px;
   color: #ffffff;
 }
 
-/* CONTAINER */
-.admin-container {
-  width: 90%;
-  max-width: 800px;
-  margin: 50px auto;
-  padding: 20px;
-  background: #1e1e2f;
-  border-radius: 10px;
+h3 {
+  margin-bottom: 15px;
+  color: #4cafef;
 }
 
-/* TITLE */
-h1 {
+/* =========================
+   MENU
+========================= */
+.menu {
+  list-style: none;
+}
+
+.menu li {
+  margin: 15px 0;
+}
+
+.menu a {
+  display: block;
+  text-decoration: none;
+  background: #4caf50;
+  color: white;
+  padding: 14px;
   text-align: center;
-  margin-bottom: 20px;
+  border-radius: 8px;
+  transition: 0.2s;
+  font-weight: bold;
 }
 
-/* BUTTONS */
+.menu a:hover {
+  background: #43a047;
+}
+
+/* =========================
+   FORM
+========================= */
+input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 6px;
+  outline: none;
+  font-size: 15px;
+}
+
+form button,
+.create-btn {
+  width: 100%;
+  margin-top: 15px;
+}
+
+/* =========================
+   CARD
+========================= */
+.card {
+  background: #2a2a3d;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 10px;
+  transition: 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+/* =========================
+   RESULTS
+========================= */
+.results {
+  margin-top: 15px;
+  padding: 12px;
+  background: #1e1e2f;
+  border-radius: 8px;
+}
+
+.results p {
+  margin: 8px 0;
+}
+
+/* =========================
+   BUTTONS
+========================= */
 button {
-  padding: 10px;
-  margin: 5px;
+  padding: 10px 15px;
+  margin-top: 10px;
+  margin-right: 10px;
   border: none;
   border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
+  transition: 0.2s;
 }
 
-/* кнопка активного */
-button:nth-child(1) {
+/* ACTIVE BUTTON */
+.active-btn {
   background: #4caf50;
   color: white;
 }
 
-/* кнопка результатів */
-button:nth-child(2) {
+.active-btn:hover {
+  background: #43a047;
+}
+
+/* RESULTS BUTTON */
+.results-btn {
   background: #ff9800;
   color: white;
 }
 
-/* кнопка видалення */
-button:nth-child(3) {
+.results-btn:hover {
+  background: #fb8c00;
+}
+
+/* DELETE BUTTON */
+.delete-btn {
   background: #e53935;
   color: white;
 }
 
-button:hover {
-  opacity: 0.9;
+.delete-btn:hover {
+  background: #d32f2f;
 }
 
-/* CARD */
-.card {
-  background: #2a2a3d;
-  padding: 15px;
-  margin-top: 15px;
-  border-radius: 8px;
-  transition: 0.2s;
-}
-
-/* RESULTS */
-.results {
+/* =========================
+   STATUS
+========================= */
+.active-status {
   margin-top: 10px;
-  padding: 10px;
-  background: #1e1e2f;
-  border-radius: 6px;
+  color: #4caf50;
+  font-weight: bold;
 }
 
-.results p {
-  margin: 5px 0;
+/* =========================
+   MOBILE
+========================= */
+@media (max-width: 600px) {
+
+  .admin-container,
+  .container {
+    width: 95%;
+    padding: 15px;
+  }
+
+  button {
+    width: 100%;
+    margin-right: 0;
+  }
+
 }
